@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { HeroScrollDemo } from "components/hero-scroll-demo";
 
 export default function Home() {
   return (
@@ -6,8 +7,8 @@ export default function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
+          src="/curenta.svg"
+          alt="Curenta logo"
           width={180}
           height={38}
           priority
@@ -47,6 +48,7 @@ export default function Home() {
             Read our docs
           </a>
         </div>
+        <HeroScrollDemo />
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <a
