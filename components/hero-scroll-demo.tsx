@@ -10,9 +10,9 @@ export function HeroScrollDemo() {
         titleComponent={
           <>
             <h1 className='text-4xl font-semibold text-black dark:text-white'>
-              Unleash the power of <br />
+              Streamline medication <br />
               <span className='mt-1 text-4xl font-bold leading-none md:text-[6rem]'>
-                Scroll Animations
+                real-time patient info
               </span>
             </h1>
           </>

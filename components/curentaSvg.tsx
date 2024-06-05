@@ -20,12 +20,12 @@ function percentageToScale(range: [number, number], percentage: number) {
   return min + (percentage / 100) * (max - min);
 }
 
-const scrollRange: [number, number] = [0.05, 0.3];
+const scrollRange: [number, number] = [0.0005, 0.03];
 
 export const CurentaSvg = observer(function Component() {
   const { scrollYProgress } = useScroll();
 
-  const [xStart, xEnd] = [100, -700];
+  const [xStart, xEnd] = [0, -800];
   const [yStart, yEnd] = [0, -230];
   const [sStart, sEnd] = [1, 0.16];
 
