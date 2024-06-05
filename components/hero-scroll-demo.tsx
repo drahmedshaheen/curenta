@@ -19,7 +19,7 @@ export function HeroScrollDemo() {
         }
       >
         <Image
-          src={`/linear.webp`}
+          src={`/MacBook-Pro-14_-2-1-2048x1368.webp`}
           alt='hero'
           height={720}
           width={1400}
