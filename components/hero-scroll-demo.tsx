@@ -25,6 +25,7 @@ export function HeroScrollDemo() {
           width={1400}
           className='mx-auto h-full rounded-2xl object-cover object-left-top'
           draggable={false}
+          priority
         />
       </ContainerScroll>
     </div>

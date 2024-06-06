@@ -1,22 +1,26 @@
 'use client';
+import { useScroll } from 'framer-motion';
+import { ScrollContext } from 'contexts/scroll';
+import { useRef } from 'react';
+import { FloatingNav } from 'components/navbar';
+import { CurentaSvg } from 'components/curentaSvg';
 import { HeroScrollDemo } from 'components/hero-scroll-demo';
-import { CurentaSvg } from '@/components/curentaSvg';
-import { useMotionValueEvent, useScroll } from 'framer-motion';
 
 export default function Home() {
-  const { scrollYProgress } = useScroll();
+  const ref = useRef<HTMLDivElement>(null);
 
-  useMotionValueEvent(scrollYProgress, 'change', (current) => {
-    console.log(current);
+  const { scrollYProgress } = useScroll({
+    target: ref,
   });
 
-  console.log(scrollYProgress.get());
   return (
     <div className='grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-sans sm:p-20'>
       <main className='row-start-2 flex h-[5000px] w-full justify-center'>
-        <CurentaSvg />
-
-        <HeroScrollDemo />
+        <ScrollContext.Provider value={scrollYProgress}>
+          <CurentaSvg scrollRange={[0.0005, 0.03]} />
+          <FloatingNav scrollRange={[0.0005, 0.03]} />
+          <HeroScrollDemo />
+        </ScrollContext.Provider>
       </main>
     </div>
   );
