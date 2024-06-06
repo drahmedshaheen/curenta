@@ -16,6 +16,7 @@ export default function Home() {
   let direction: number;
 
   useMotionValueEvent(scrollYProgress, 'change', (current) => {
+    if (typeof current !== 'number') return;
     console.log(current);
     direction = current - scrollYProgress.getPrevious()!;
   });
