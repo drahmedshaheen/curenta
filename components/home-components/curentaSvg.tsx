@@ -6,9 +6,10 @@ import {
   percentageToValue,
   generateAnimationValues,
 } from 'scripts/math';
+import type { RefObject } from 'react';
 
 interface CurentaSvgProps {
-  ref: any;
+  ref: RefObject<HTMLDivElement>;
   className?: string;
   scrollRange: [number, number];
   animationValues: {

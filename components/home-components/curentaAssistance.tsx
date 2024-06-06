@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { type RefObject, useState } from 'react';
 import {
   useScroll,
   useTransform,
@@ -11,7 +11,11 @@ import {
 import { cn } from 'utils/cn';
 import { observer } from '@legendapp/state/react';
 
-export function CurentaAssistancePhase1({ ref }: { ref: any }) {
+interface CurentaAssistanceProps {
+  ref: RefObject<HTMLDivElement>;
+}
+
+export function CurentaAssistance({ ref }: CurentaAssistanceProps) {
   return (
     <div className='flex flex-col overflow-hidden'>
       <ContainerScroll
@@ -52,6 +56,7 @@ export const ContainerScroll = observer(function Component({
 }) {
   const { scrollYProgress } = useScroll({
     target: ref,
+    layoutEffect: false,
   });
 
   const [phase, setPhase] = useState(false);
@@ -61,13 +66,13 @@ export const ContainerScroll = observer(function Component({
   const translate = useTransform(scrollYProgress, [0, 0.05], [0, -100]);
   const translateCard = useTransform(
     scrollYProgress,
-    [0, 0.05, 0.08],
-    [0, 0, -300]
+    [0, 0.05, 0.08, 0.2, 0.3],
+    [0, 0, -300, -300, 300]
   );
 
   useMotionValueEvent(scrollYProgress, 'change', (current) => {
-    if (current > 0.5) setPhase(true);
-    if (current <= 0.5) setPhase(false);
+    if (current > 0.05) setPhase(true);
+    if (current <= 0.05) setPhase(false);
   });
 
   return (

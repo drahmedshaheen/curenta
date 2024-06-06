@@ -8,9 +8,10 @@ import {
 import { observer, useObservable } from '@legendapp/state/react';
 import { cn } from 'utils/cn';
 import { z } from 'zod';
+import type { RefObject } from 'react';
 
 interface FloatingNavProps {
-  ref: any;
+  ref: RefObject<HTMLDivElement>;
   className?: string;
   scrollRange: [number, number];
   navItems: string[];

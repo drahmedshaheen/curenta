@@ -1,3 +1,3 @@
 export * from './curentaSvg';
 export * from './floatingNav';
-export * from './curentaAssistancePhase1';
+export * from './curentaAssistance';
