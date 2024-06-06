@@ -1,9 +1,6 @@
 'use client';
-import { motion, useMotionValueEvent } from 'framer-motion';
-import { observer } from '@legendapp/state/react';
-import { useObservable } from '@legendapp/state/react';
-import { useContext } from 'react';
-import { ScrollContext } from 'contexts/scroll';
+import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { observer, useObservable } from '@legendapp/state/react';
 import {
   calculatePercentage,
   percentageToValue,
@@ -11,6 +8,7 @@ import {
 } from 'scripts/math';
 
 interface CurentaSvgProps {
+  ref: any;
   className?: string;
   scrollRange: [number, number];
   animationValues: {
@@ -21,45 +19,47 @@ interface CurentaSvgProps {
 }
 
 export const CurentaSvg = observer(function Component({
+  ref,
   scrollRange,
   animationValues,
 }: CurentaSvgProps) {
-  const scrollYProgress = useContext(ScrollContext);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+  });
+
   const animation = useObservable(generateAnimationValues(animationValues, 0));
 
-  if (scrollYProgress) {
-    useMotionValueEvent(scrollYProgress, 'change', (current) => {
-      // Check if current is not undefined and is a number
-      if (typeof current === 'number') {
-        const [minScroll, maxScroll] = scrollRange;
-        let condition =
-          current > minScroll && current < maxScroll
-            ? 'range'
-            : current < minScroll
-              ? 'min'
-              : 'max';
+  useMotionValueEvent(scrollYProgress, 'change', (current) => {
+    // Check if current is not undefined and is a number
+    if (typeof current === 'number') {
+      const [minScroll, maxScroll] = scrollRange;
+      let condition =
+        current > minScroll && current < maxScroll
+          ? 'range'
+          : current < minScroll
+            ? 'min'
+            : 'max';
 
-        switch (condition) {
-          case 'range':
-            const percentage = calculatePercentage(scrollRange, current);
-            const reversePercentage = 100 - percentage;
-            const { x, y, scale } = animationValues;
-            animation.set({
-              x: percentageToValue(x, reversePercentage),
-              y: percentageToValue(y, reversePercentage),
-              scale: percentageToValue(scale, reversePercentage),
-            });
-            break;
-          case 'min':
-            animation.set(generateAnimationValues(animationValues, 0));
-            break;
-          case 'max':
-            animation.set(generateAnimationValues(animationValues, 1));
-            break;
-        }
+      switch (condition) {
+        case 'range':
+          const percentage = calculatePercentage(scrollRange, current);
+          const reversePercentage = 100 - percentage;
+          const { x, y, scale } = animationValues;
+          animation.set({
+            x: percentageToValue(x, reversePercentage),
+            y: percentageToValue(y, reversePercentage),
+            scale: percentageToValue(scale, reversePercentage),
+          });
+          break;
+        case 'min':
+          animation.set(generateAnimationValues(animationValues, 0));
+          break;
+        case 'max':
+          animation.set(generateAnimationValues(animationValues, 1));
+          break;
       }
-    });
-  }
+    }
+  });
 
   return (
     <motion.svg

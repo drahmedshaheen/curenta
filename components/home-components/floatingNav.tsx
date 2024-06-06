@@ -1,12 +1,16 @@
 'use client';
-import { motion, AnimatePresence, useMotionValueEvent } from 'framer-motion';
+import {
+  motion,
+  AnimatePresence,
+  useMotionValueEvent,
+  useScroll,
+} from 'framer-motion';
 import { observer, useObservable } from '@legendapp/state/react';
-import { useContext } from 'react';
-import { ScrollContext } from 'contexts/scroll';
 import { cn } from 'utils/cn';
 import { z } from 'zod';
 
 interface FloatingNavProps {
+  ref: any;
   className?: string;
   scrollRange: [number, number];
   navItems: string[];
@@ -18,27 +22,29 @@ interface FloatingNavProps {
 }
 
 export const FloatingNav = observer(function Component({
+  ref,
   navItems,
   scrollRange,
   className,
 }: FloatingNavProps) {
-  const scrollYProgress = useContext(ScrollContext);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+  });
+
   const visible = useObservable(false);
 
-  if (scrollYProgress) {
-    useMotionValueEvent(scrollYProgress, 'change', (current) => {
-      // Check if current is not undefined and is a number
-      if (typeof current === 'number') {
-        const [_, maxScrollRange] = scrollRange;
+  useMotionValueEvent(scrollYProgress, 'change', (current) => {
+    // Check if current is not undefined and is a number
+    if (typeof current === 'number') {
+      const [_, maxScrollRange] = scrollRange;
 
-        if (current <= maxScrollRange) {
-          visible.set(false);
-        } else {
-          visible.set(true);
-        }
+      if (current <= maxScrollRange) {
+        visible.set(false);
+      } else {
+        visible.set(true);
       }
-    });
-  }
+    }
+  });
 
   return (
     <AnimatePresence mode='wait'>
