@@ -63,11 +63,24 @@ export const ContainerScroll = observer(function Component({
 
   const rotate = useTransform(scrollYProgress, [0, 0.05], [50, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.05], [1.05, 1]);
-  const translate = useTransform(scrollYProgress, [0, 0.05], [0, -100]);
-  const translateCard = useTransform(
+  const translateHeader = useTransform(scrollYProgress, [0, 0.05], [0, -100]);
+  const position = useTransform(
     scrollYProgress,
-    [0, 0.05, 0.08, 0.2, 0.3],
+    [0, 0.04, 0.06],
+    ['relative', 'relative', 'fixed']
+  );
+  const translateCardX = useTransform(
+    scrollYProgress,
+    [0, 0.05, 0.1, 0.2, 0.3],
     [0, 0, -300, -300, 300]
+  );
+
+  const opacity = useTransform(scrollYProgress, [0, 0.05], [100, 0]);
+
+  const top = useTransform(
+    scrollYProgress,
+    [0, 0.04, 0.08],
+    ['auto', 'auto', -100]
   );
 
   useMotionValueEvent(scrollYProgress, 'change', (current) => {
@@ -76,58 +89,53 @@ export const ContainerScroll = observer(function Component({
   });
 
   return (
-    <>
-      <div className='relative flex h-[60rem] w-[90vw] items-center justify-center p-2 md:h-[80rem] md:p-20'>
-        <div
-          className={cn(
-            'w-full py-10 md:py-40',
-            phase ? 'fixed top-[-120]' : 'relative'
-          )}
-          style={{
-            perspective: '1000px',
-          }}
-        >
-          <Header translate={translate} titleComponent={titleComponent} />
-
-          <Card rotate={rotate} scale={scale} translate={translateCard}>
-            {children}
-          </Card>
-        </div>
-      </div>
-      <motion.span
-        translate='yes'
-        initial={{
-          opacity: 0,
+    <div className='relative flex h-[60rem] w-[90vw] items-center justify-center p-2 md:h-[80rem] md:p-20'>
+      <motion.div
+        className='w-full py-10 md:py-40'
+        style={{
+          top,
+          position,
+          perspective: '1000px',
         }}
-        animate={{
-          opacity: !phase ? 0 : 100,
-          transition: {
-            delay: !phase ? 0 : 0.5,
-          },
-        }}
-        exit={{
-          opacity: 0,
-          transition: {
-            delay: 0,
-          },
-        }}
-        className={cn(
-          'right-[150] w-[500] text-4xl font-medium',
-          phase ? 'fixed top-[300]' : 'relative'
-        )}
       >
-        Curenta’s Assisted Living software revolutionizes how facilities manage
-        medications, minimize manual work, and provide a single source of truth
-        for real-time patient information.
-      </motion.span>
-    </>
+        <Header
+          opacity={opacity}
+          translate={translateHeader}
+          titleComponent={titleComponent}
+        />
+        <motion.div
+          style={{
+            x: useTransform(
+              scrollYProgress,
+              [0.15, 0.2, 0.3, 0.4],
+              [1200, 1200, 100, 100]
+            ),
+            opacity: useTransform(
+              scrollYProgress,
+              [0, 0.1, 0.15, 0.2, 0.3, 0.4],
+              [0, 0, 100, 0, 0, 100]
+            ),
+          }}
+          className='absolute top-[400px] w-[550px] text-4xl font-medium'
+        >
+          Curenta’s Assisted Living software revolutionizes how facilities
+          manage medications, minimize manual work, and provide a single source
+          of truth for real-time patient information.
+        </motion.div>
+
+        <Card rotate={rotate} scale={scale} translateX={translateCardX}>
+          {children}
+        </Card>
+      </motion.div>
+    </div>
   );
 });
 
-export const Header = ({ translate, titleComponent }: any) => {
+export const Header = ({ opacity, translate, titleComponent }: any) => {
   return (
     <motion.div
       style={{
+        opacity: opacity,
         translateY: translate,
       }}
       className='mx-auto max-w-5xl text-center'
@@ -140,19 +148,19 @@ export const Header = ({ translate, titleComponent }: any) => {
 export const Card = ({
   rotate,
   scale,
-  translate,
+  translateX,
   children,
 }: {
   rotate: MotionValue<number>;
   scale: MotionValue<number>;
-  translate: MotionValue<number>;
+  translateX: MotionValue<number>;
   children: React.ReactNode;
 }) => {
   return (
     <motion.div
       style={{
         rotateX: rotate,
-        translateX: translate,
+        translateX: translateX,
         scale,
         boxShadow:
           '0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003',
