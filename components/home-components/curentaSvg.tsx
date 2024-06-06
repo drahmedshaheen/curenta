@@ -4,63 +4,62 @@ import { observer } from '@legendapp/state/react';
 import { useObservable } from '@legendapp/state/react';
 import { useContext } from 'react';
 import { ScrollContext } from 'contexts/scroll';
-import { calculatePercentage, percentageToValue } from '@/scripts/math';
+import {
+  calculatePercentage,
+  percentageToValue,
+  generateAnimationValues,
+} from 'scripts/math';
 
-interface ComponentProps {
+interface CurentaSvgProps {
+  className?: string;
   scrollRange: [number, number];
+  animationValues: {
+    x: [number, number];
+    y: [number, number];
+    scale: [number, number];
+  };
 }
 
 export const CurentaSvg = observer(function Component({
   scrollRange,
-}: ComponentProps) {
+  animationValues,
+}: CurentaSvgProps) {
   const scrollYProgress = useContext(ScrollContext);
+  const animation = useObservable(generateAnimationValues(animationValues, 0));
 
   if (scrollYProgress) {
     useMotionValueEvent(scrollYProgress, 'change', (current) => {
       // Check if current is not undefined and is a number
       if (typeof current === 'number') {
-        const [minScrollRange, maxScrollRange] = scrollRange;
-
-        let condition;
-        if (current > minScrollRange || current < maxScrollRange) {
-          condition = 'range';
-        } else if (current < minScrollRange) {
-          condition = 'min';
-        } else if (current > maxScrollRange) {
-          condition = 'max';
-        }
+        const [minScroll, maxScroll] = scrollRange;
+        let condition =
+          current > minScroll && current < maxScroll
+            ? 'range'
+            : current < minScroll
+              ? 'min'
+              : 'max';
 
         switch (condition) {
           case 'range':
             const percentage = calculatePercentage(scrollRange, current);
-            const scale = percentageToValue([sEnd, sStart], 100 - percentage);
-            const x = percentageToValue([xEnd, xStart], 100 - percentage);
-            const y = percentageToValue([yEnd, yStart], 100 - percentage);
-            animation.set({ x: x, y: y, scale: scale });
+            const reversePercentage = 100 - percentage;
+            const { x, y, scale } = animationValues;
+            animation.set({
+              x: percentageToValue(x, reversePercentage),
+              y: percentageToValue(y, reversePercentage),
+              scale: percentageToValue(scale, reversePercentage),
+            });
             break;
           case 'min':
-            animation.set(animationStartValue);
+            animation.set(generateAnimationValues(animationValues, 0));
             break;
           case 'max':
-            animation.set(animationEndValue);
+            animation.set(generateAnimationValues(animationValues, 1));
             break;
         }
       }
     });
   }
-
-  const [xStart, xEnd] = [0, -800];
-  const [yStart, yEnd] = [0, -230];
-  const [sStart, sEnd] = [1, 0.16];
-
-  const animationStartValue = {
-    x: xStart,
-    y: yStart,
-    scale: sStart,
-  };
-  const animationEndValue = { x: xEnd, y: yEnd, scale: sEnd };
-
-  const animation = useObservable(animationStartValue);
 
   return (
     <motion.svg

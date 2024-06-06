@@ -6,11 +6,15 @@ export const calculatePercentage = (range: [number, number], value: number) => {
 };
 
 export const percentageToValue = (
-  range: [number, number],
+  [start, end]: [number, number],
   percentage: number
 ) => {
-  const [min, max] = range;
-  if (percentage < 0) return min;
-  if (percentage > 100) return max;
-  return min + (percentage / 100) * (max - min);
+  if (percentage < 0) return end;
+  if (percentage > 100) return start;
+  return end + (percentage / 100) * (start - end);
 };
+
+export const generateAnimationValues = (obj: object, index: number) =>
+  Object.fromEntries(
+    Object.entries(obj).map(([key, value]) => [key, value[index]])
+  );
