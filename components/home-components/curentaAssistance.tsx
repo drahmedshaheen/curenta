@@ -36,12 +36,12 @@ export const CurentaAssistance = observer(function Component({
           style={{
             top: useTransform(
               scrollYProgress,
-              [0, 0.04, 0.08, 0.35, 0.5],
-              ['auto', 'auto', -100, -100, -5000]
+              [0, 0.04, 0.05, 0.35, 0.35001],
+              ['auto', 'auto', -100, -100, 1550]
             ),
             position: useTransform(
               scrollYProgress,
-              [0, 0.04, 0.06, 0.5, 0.55],
+              [0, 0.04, 0.05, 0.35, 0.35001],
               ['relative', 'relative', 'fixed', 'fixed', 'relative']
             ),
             perspective: '1000px',
@@ -91,8 +91,8 @@ const Description = ({
       style={{
         x: useTransform(
           scrollYProgress,
-          [0.04, 0.1, 0.2, 0.3],
-          [200, 1200, 1200, 150]
+          [0.04, 0.1, 0.2, 0.3, 0.35, 0.35001],
+          [200, 1200, 1200, 150, 150, -20]
         ),
         opacity: useTransform(
           scrollYProgress,
