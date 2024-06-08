@@ -62,7 +62,7 @@ export const FloatingNav = observer(function Component({
           duration: 0.3,
         }}
         className={cn(
-          'fixed inset-x-0 top-0 z-10 mx-auto grid h-20 w-full grid-cols-3 items-center border-b border-blue-200 bg-white py-2 pl-8 pr-2 dark:border-white/[0.2] dark:bg-black',
+          'fixed inset-x-0 top-0 z-10 mx-auto grid h-20 w-full grid-cols-3 items-center border-b border-blue-200 bg-white/80 py-2 pl-8 pr-2 backdrop-blur dark:border-white/[0.2] dark:bg-black',
           className
         )}
       >
@@ -114,7 +114,7 @@ export const InputWithPlaceholder = observer(function Component() {
   const isEmail = InputSchema.safeParse(value.get()).success;
 
   return (
-    <div className='relative h-10 w-full rounded-full shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),_0px_1px_0px_0px_rgba(25,28,33,0.02),_0px_0px_0px_1px_rgba(25,28,33,0.08)] transition duration-200'>
+    <div className='relative h-10 w-full rounded-full bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),_0px_1px_0px_0px_rgba(25,28,33,0.02),_0px_0px_0px_1px_rgba(25,28,33,0.08)] transition duration-200'>
       <input
         onChange={(e) => value.set(e.target.value)}
         value={value.get()}

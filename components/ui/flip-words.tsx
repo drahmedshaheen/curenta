@@ -1,7 +1,7 @@
 'use client';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, LayoutGroup } from 'framer-motion';
-import { cn } from 'utils/cn';
+import { cn } from '@/utils/cn';
 
 export const FlipWords = ({
   words,
@@ -29,12 +29,15 @@ export const FlipWords = ({
       }, duration);
   }, [isAnimating, duration, startAnimation]);
 
+  useEffect(() => {
+    console.log(isAnimating);
+  }, [isAnimating]);
+  useEffect(() => {
+    console.log(currentWord);
+  }, [currentWord]);
+
   return (
-    <AnimatePresence
-      onExitComplete={() => {
-        setIsAnimating(false);
-      }}
-    >
+    <AnimatePresence onExitComplete={() => setIsAnimating(false)}>
       <motion.div
         initial={{
           opacity: 0,
@@ -60,7 +63,7 @@ export const FlipWords = ({
           position: 'absolute',
         }}
         className={cn(
-          'relative z-10 inline-block px-2 text-left text-neutral-900 dark:text-neutral-100',
+          'relative z-10 inline-block text-left text-5xl text-blue-500 dark:text-neutral-100',
           className
         )}
         key={currentWord}

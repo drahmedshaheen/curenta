@@ -17,7 +17,6 @@ export default function Home() {
 
   useMotionValueEvent(scrollYProgress, 'change', (current) => {
     if (typeof current !== 'number') return;
-    console.log(current);
     direction = current - scrollYProgress.getPrevious()!;
   });
 
@@ -41,6 +40,7 @@ export default function Home() {
             scale: [1, 0.16],
           }}
         />
+
         <CurentaAssistance ref={ref} />
       </main>
     </div>

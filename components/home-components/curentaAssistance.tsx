@@ -10,6 +10,8 @@ import {
 } from 'framer-motion';
 import { observer, useObservable } from '@legendapp/state/react';
 
+import { CurentaHeader } from './curentaHeader';
+
 interface CurentaAssistanceProps {
   ref: RefObject<HTMLDivElement>;
 }
@@ -25,7 +27,14 @@ export const CurentaAssistance = observer(function Component({
   const phase = useObservable(1);
   useMotionValueEvent(scrollYProgress, 'change', (current) => {
     if (typeof current !== 'number') return;
-    current > 0.25 ? phase.set(2) : phase.set(1);
+
+    if (current >= 0.35001) {
+      phase.set(3);
+    } else if (current > 0.25) {
+      phase.set(2);
+    } else {
+      phase.set(1);
+    }
   });
 
   return (
@@ -52,6 +61,8 @@ export const CurentaAssistance = observer(function Component({
           <Description scrollYProgress={scrollYProgress} phase={phase.get()} />
 
           <Children scrollYProgress={scrollYProgress} phase={phase.get()} />
+
+          {phase.get() >= 3 && <CurentaHeader />}
         </motion.div>
       </div>
     </div>
@@ -112,7 +123,7 @@ const Description = ({
         </>
       )}
 
-      {phase === 2 && (
+      {phase >= 2 && (
         <>
           <h1 className='font-bold text-blue-500'>
             Electronic Medication Administration Records (EMAR)
@@ -161,7 +172,7 @@ const Children = ({
           />
         )}
 
-        {phase === 2 && (
+        {phase >= 2 && (
           <Image
             src={`/MacBook-Pro-14_-1-2048x1368.webp`}
             alt='hero'
