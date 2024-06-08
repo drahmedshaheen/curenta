@@ -2,10 +2,15 @@
 import { FlipWords } from '../ui/flip-words';
 
 export const CurentaHeader = () => {
-  const words = ['Better', 'Cute', 'Beautiful', 'Modern'];
+  const words = [
+    'Less Medication Errors',
+    'Centralized Medication Information',
+    'Integrated Medication Ordering Tool',
+    'Mobile Updates To Families',
+  ];
 
   return (
-    <div className='flex h-[800px] w-[500px] flex-col items-start justify-center gap-5'>
+    <div className='relative left-24 top-80 flex h-[400px] w-[600px] flex-col gap-5'>
       <h2 className='text-5xl font-bold text-gray-700 dark:text-neutral-400'>
         One Senior Living Software To Get
       </h2>
