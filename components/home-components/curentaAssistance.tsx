@@ -78,10 +78,10 @@ const Header = ({
     }}
     className='mx-auto max-w-5xl text-center'
   >
-    <h1 className='text-4xl font-semibold text-black dark:text-white'>
-      Streamline medication <br />
-      <span className='mt-1 text-4xl font-bold leading-none md:text-[6rem]'>
-        real-time patient info
+    <h1 className='mt-10 text-4xl font-semibold text-black dark:text-white'>
+      A ONE-STOP SOLUTION FOR <br />
+      <span className='text-5xl font-bold leading-none'>
+        ALL YOUR RESIDENT INFORMATION
       </span>
     </h1>
   </motion.div>

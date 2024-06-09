@@ -5,7 +5,7 @@ import {
   percentageToValue,
   generateAnimationValues,
 } from 'scripts/math';
-import { forwardRef, useRef, useState, type RefObject } from 'react';
+import { forwardRef, useState, type RefObject } from 'react';
 
 interface CurentaSvgProps {
   className?: string;
@@ -24,6 +24,7 @@ export const CurentaSvg = forwardRef<HTMLDivElement, CurentaSvgProps>(
     const { scrollYProgress } = useScroll({
       target: ref as RefObject<HTMLDivElement>,
       layoutEffect: false,
+      offset: ['0 0.1', '1 1'],
     });
 
     const [animation, setAnimation] = useState(
