@@ -43,7 +43,7 @@ export const CurentaAssistance = forwardRef<HTMLDivElement>((_, ref) => {
             top: useTransform(
               scrollYProgress,
               [0, 0.04, 0.05, 0.35, 0.351],
-              ['auto', 'auto', -100, -100, 1600]
+              ['auto', 'auto', -100, -100, 1550]
             ),
             position: useTransform(
               scrollYProgress,

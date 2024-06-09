@@ -26,7 +26,7 @@ export default function Home() {
     <div className='grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-sans sm:p-20'>
       <main
         ref={ref}
-        className='relative row-start-2 flex h-[3600px] w-full justify-center'
+        className='relative row-start-2 flex h-[3400px] w-full justify-center'
       >
         <FloatingNav
           ref={ref}
