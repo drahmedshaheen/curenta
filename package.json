@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -11,13 +11,11 @@
     "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
-    "@legendapp/state": "3.0.0-alpha.8",
-    "@tabler/icons-react": "^3.5.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.2.10",
-    "next": "15.0.0-rc.0",
-    "react": "19.0.0-rc-f994737d14-20240522",
-    "react-dom": "19.0.0-rc-f994737d14-20240522",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18",
     "tailwind-merge": "^2.3.0",
     "zod": "^3.23.8"
   },
@@ -26,7 +24,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "15.0.0-rc.0",
+    "eslint-config-next": "14.2.3",
     "postcss": "^8",
     "prettier": "3.3.0",
     "prettier-plugin-tailwindcss": "^0.6.1",

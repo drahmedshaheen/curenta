@@ -1,70 +1,75 @@
 'use client';
-import Image from 'next/image';
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
-import { observer } from '@legendapp/state/react';
-import { useObserve, useObservable, Reactive } from '@legendapp/state/react';
+import {
+  calculatePercentage,
+  percentageToValue,
+  generateAnimationValues,
+} from 'scripts/math';
+import { forwardRef, useState, type RefObject } from 'react';
 
-import { FloatingNav } from './navbar';
-
-function calculatePercentage(range: [number, number], value: number) {
-  const [min, max] = range;
-  if (value < min) return 0;
-  if (value > max) return 100;
-  return Math.round(((value - min) / (max - min)) * 100);
-}
-
-function percentageToScale(range: [number, number], percentage: number) {
-  const [min, max] = range;
-  if (percentage < 0) return min;
-  if (percentage > 100) return max;
-  return min + (percentage / 100) * (max - min);
-}
-
-const scrollRange: [number, number] = [0.0005, 0.03];
-
-export const CurentaSvg = observer(function Component() {
-  const { scrollYProgress } = useScroll();
-
-  const [xStart, xEnd] = [0, -800];
-  const [yStart, yEnd] = [0, -230];
-  const [sStart, sEnd] = [1, 0.16];
-
-  const animationStartValue = {
-    x: xStart,
-    y: yStart,
-    scale: sStart,
+interface CurentaSvgProps {
+  className?: string;
+  scrollRange: [number, number];
+  animationValues: {
+    x: [number, number];
+    y: [number, number];
+    scale: [number, number];
   };
-  const animationEndValue = { x: xEnd, y: yEnd, scale: sEnd };
+}
 
-  const animation = useObservable(animationStartValue);
+export const CurentaSvg = forwardRef<HTMLDivElement, CurentaSvgProps>(
+  (props, ref) => {
+    const { scrollRange, animationValues, className } = props;
 
-  useMotionValueEvent(scrollYProgress, 'change', (current) => {
-    // Check if current is not undefined and is a number
-    if (typeof current === 'number') {
-      const [minScrollRange, maxScrollRange] = scrollRange;
+    const { scrollYProgress } = useScroll({
+      target: ref as RefObject<HTMLDivElement>,
+      layoutEffect: false,
+      offset: ['0 0.1', '1 1'],
+    });
 
-      if (current > minScrollRange || current < maxScrollRange) {
-        const percentage = calculatePercentage(scrollRange, current);
-        const scale = percentageToScale([sEnd, sStart], 100 - percentage);
-        const x = percentageToScale([xEnd, xStart], 100 - percentage);
-        const y = percentageToScale([yEnd, yStart], 100 - percentage);
-        animation.set({ x: x, y: y, scale: scale });
-      } else if (current < minScrollRange) {
-        animation.set(animationStartValue);
-      } else if (current > maxScrollRange) {
-        animation.set(animationEndValue);
+    const [animation, setAnimation] = useState(
+      generateAnimationValues(animationValues, 0)
+    );
+
+    useMotionValueEvent(scrollYProgress, 'change', (current) => {
+      // Check if current is not undefined and is a number
+      if (typeof current === 'number') {
+        const [minScroll, maxScroll] = scrollRange;
+        let condition =
+          current > minScroll && current < maxScroll
+            ? 'range'
+            : current < minScroll
+              ? 'min'
+              : 'max';
+
+        switch (condition) {
+          case 'range':
+            const percentage = calculatePercentage(scrollRange, current);
+            const reversePercentage = 100 - percentage;
+            const { x, y, scale } = animationValues;
+            setAnimation({
+              x: percentageToValue(x, reversePercentage),
+              y: percentageToValue(y, reversePercentage),
+              scale: percentageToValue(scale, reversePercentage),
+            });
+            break;
+          case 'min':
+            setAnimation(generateAnimationValues(animationValues, 0));
+            break;
+          case 'max':
+            setAnimation(generateAnimationValues(animationValues, 1));
+            break;
+        }
       }
-    }
-  });
+    });
 
-  return (
-    <>
+    return (
       <motion.svg
         xmlns='http://www.w3.org/2000/svg'
         viewBox='0 0 1000 217.08'
         id='Layer_1'
         data-name='Layer 1'
-        animate={animation.get()}
+        animate={animation}
         transition={{ bounce: false, duration: 0 }}
         className='fixed z-20 w-[50vw]'
       >
@@ -122,7 +127,6 @@ export const CurentaSvg = observer(function Component() {
           d='M981.23,83.58c-2.71,0-5.2-.47-7.49-1.4-2.29-.93-4.26-2.23-5.93-3.9-1.67-1.67-2.97-3.65-3.9-5.93-.93-2.29-1.4-4.78-1.4-7.49s.47-5.2,1.4-7.49c.93-2.28,2.23-4.27,3.9-5.96,1.67-1.69,3.65-3,5.93-3.93,2.29-.93,4.78-1.4,7.49-1.4s5.2.47,7.49,1.4c2.29.93,4.27,2.24,5.96,3.93,1.69,1.69,3,3.67,3.93,5.96.93,2.29,1.4,4.78,1.4,7.49s-.47,5.2-1.4,7.49c-.93,2.29-2.24,4.26-3.93,5.93-1.69,1.67-3.67,2.97-5.96,3.9-2.29.93-4.78,1.4-7.49,1.4ZM981.23,80.78c3.09,0,5.85-.68,8.28-2.06,2.43-1.37,4.33-3.25,5.72-5.64,1.39-2.39,2.08-5.13,2.08-8.23s-.7-5.84-2.08-8.25c-1.39-2.41-3.3-4.31-5.72-5.69-2.42-1.39-5.19-2.08-8.28-2.08s-5.91.69-8.33,2.08c-2.43,1.39-4.32,3.29-5.67,5.69-1.35,2.41-2.03,5.16-2.03,8.25s.68,5.85,2.03,8.25c1.35,2.41,3.24,4.29,5.67,5.64,2.43,1.35,5.2,2.03,8.33,2.03ZM974.13,73.7v-17.58h9.22c1.96,0,3.47.46,4.52,1.39,1.05.93,1.58,2.21,1.58,3.86,0,1.14-.32,2.15-.96,3.03-.64.88-1.5,1.55-2.58,2l4.1,7.3h-3.54l-3.54-6.66h-5.59v6.66h-3.2ZM977.33,64.4h5.76c.94,0,1.69-.26,2.24-.77.55-.51.83-1.21.83-2.09s-.27-1.56-.81-2.05c-.54-.48-1.29-.73-2.26-.73h-5.76v5.63Z'
         />
       </motion.svg>
-      <FloatingNav scrollRange={scrollRange} />
-    </>
-  );
-});
+    );
+  }
+);
