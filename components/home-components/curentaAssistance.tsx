@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import type { RefObject } from 'react';
+import { forwardRef, useState, type RefObject } from 'react';
 import {
   useScroll,
   useTransform,
@@ -8,32 +8,29 @@ import {
   useMotionValueEvent,
   MotionValue,
 } from 'framer-motion';
-import { observer, useObservable } from '@legendapp/state/react';
 
-import { CurentaHeader } from './curentaHeader';
+import { CurentaHeadlines } from './curentaHeadlines';
 
 interface CurentaAssistanceProps {
-  ref: RefObject<HTMLDivElement>;
+  // Define any other props you might have
 }
 
-export const CurentaAssistance = observer(function Component({
-  ref,
-}: CurentaAssistanceProps) {
+export const CurentaAssistance = forwardRef<HTMLDivElement>((_, ref) => {
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: ref as RefObject<HTMLDivElement>,
     layoutEffect: false,
   });
 
-  const phase = useObservable(1);
+  const [phase, setPhase] = useState(1);
   useMotionValueEvent(scrollYProgress, 'change', (current) => {
     if (typeof current !== 'number') return;
 
     if (current >= 0.35001) {
-      phase.set(3);
+      setPhase(3);
     } else if (current > 0.25) {
-      phase.set(2);
+      setPhase(2);
     } else {
-      phase.set(1);
+      setPhase(1);
     }
   });
 
@@ -46,7 +43,7 @@ export const CurentaAssistance = observer(function Component({
             top: useTransform(
               scrollYProgress,
               [0, 0.04, 0.05, 0.35, 0.35001],
-              ['auto', 'auto', -100, -100, 1550]
+              ['auto', 'auto', -100, -100, 1480]
             ),
             position: useTransform(
               scrollYProgress,
@@ -58,11 +55,11 @@ export const CurentaAssistance = observer(function Component({
         >
           <Header scrollYProgress={scrollYProgress} />
 
-          <Description scrollYProgress={scrollYProgress} phase={phase.get()} />
+          <Description scrollYProgress={scrollYProgress} phase={phase} />
 
-          <Children scrollYProgress={scrollYProgress} phase={phase.get()} />
+          <Children scrollYProgress={scrollYProgress} phase={phase} />
 
-          {phase.get() >= 3 && <CurentaHeader />}
+          {phase >= 3 && <CurentaHeadlines />}
         </motion.div>
       </div>
     </div>
