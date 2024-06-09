@@ -4,11 +4,11 @@ import { AnimatePresence, motion, LayoutGroup } from 'framer-motion';
 import { cn } from '@/utils/cn';
 
 export const FlipWords = ({
-  words,
+  headlines,
   duration = 3000,
   className,
 }: {
-  words: string[];
+  headlines: string[];
   duration?: number;
   className?: string;
 }) => {
@@ -16,12 +16,12 @@ export const FlipWords = ({
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % words.length);
+      setIndex((prevIndex) => (prevIndex + 1) % headlines.length);
     }, duration);
 
     // Clean up interval on unmount
     return () => clearInterval(interval);
-  }, [words, duration]);
+  }, [headlines, duration]);
 
   return (
     <AnimatePresence mode='wait'>
@@ -34,9 +34,9 @@ export const FlipWords = ({
           'relative z-10 inline-block text-left text-5xl text-blue-500 dark:text-neutral-100',
           className
         )}
-        key={words[index]}
+        key={headlines[index]}
       >
-        {words[index]}
+        {headlines[index]}
       </motion.h1>
     </AnimatePresence>
   );

@@ -2,7 +2,7 @@
 import { FlipWords } from '../ui/flip-words';
 
 export const CurentaHeader = () => {
-  const words = [
+  const headlines = [
     'Less Medication Errors',
     'Centralized Medication Information',
     'Integrated Medication Ordering Tool',
@@ -14,7 +14,7 @@ export const CurentaHeader = () => {
       <h2 className='text-5xl font-bold text-gray-700 dark:text-neutral-400'>
         One Senior Living Software To Get
       </h2>
-      <FlipWords words={words} />
+      <FlipWords headlines={headlines} />
       <span className='w-[400px] text-2xl font-light text-gray-600'>
         Sync, centralize, and streamline your senior living community.
       </span>
