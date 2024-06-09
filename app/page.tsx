@@ -9,6 +9,7 @@ import {
 
 export default function Home() {
   const ref = useRef<HTMLDivElement>(null);
+
   const { scrollYProgress } = useScroll({
     target: ref,
   });
@@ -25,7 +26,7 @@ export default function Home() {
     <div className='grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-sans sm:p-20'>
       <main
         ref={ref}
-        className='relative row-start-2 flex h-[6000px] w-full justify-center'
+        className='relative row-start-2 flex h-[4000px] w-full justify-center'
       >
         <FloatingNav
           ref={ref}
