@@ -2,6 +2,7 @@
 
 import { cn } from '@/utils/cn';
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 export const InfiniteMovingCards = ({
   items,
@@ -14,6 +15,7 @@ export const InfiniteMovingCards = ({
     quote: string;
     name: string;
     title: string;
+    img: string;
   }[];
   direction?: 'left' | 'right';
   speed?: 'fast' | 'normal' | 'slow';
@@ -87,7 +89,7 @@ export const InfiniteMovingCards = ({
       >
         {items.map((item, idx) => (
           <li
-            className='relative w-[350px] max-w-full flex-shrink-0 rounded-2xl border border-b-0 border-slate-700 px-8 py-6 md:w-[450px]'
+            className='relative w-[550px] max-w-full flex-shrink-0 rounded-2xl border border-b-0 border-slate-700 px-8 py-6'
             style={{
               background:
                 'linear-gradient(180deg, var(--slate-800), var(--slate-900)',
@@ -99,15 +101,25 @@ export const InfiniteMovingCards = ({
                 aria-hidden='true'
                 className='user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]'
               ></div>
-              <span className='relative z-20 text-sm font-normal leading-[1.6] text-gray-100'>
+              <span className='relative z-20 text-sm font-normal leading-[1.6] text-gray-400'>
                 {item.quote}
               </span>
-              <div className='relative z-20 mt-6 flex flex-row items-center'>
+              <div className='relative z-20 mt-6 flex'>
+                <Image
+                  src={`/${item.img}.png`}
+                  alt='hero'
+                  height={44}
+                  width={44}
+                  className='mr-5 size-11 rounded-full object-cover object-left-top'
+                  draggable={false}
+                  priority
+                />
+
                 <span className='flex flex-col gap-1'>
-                  <span className='text-sm font-normal leading-[1.6] text-gray-400'>
+                  <span className='text-sm font-bold leading-[1.6] text-gray-400'>
                     {item.name}
                   </span>
-                  <span className='text-sm font-normal leading-[1.6] text-gray-400'>
+                  <span className='text-sm font-bold leading-[1.6] text-gray-400'>
                     {item.title}
                   </span>
                 </span>
