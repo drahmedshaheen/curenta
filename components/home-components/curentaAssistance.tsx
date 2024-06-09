@@ -25,7 +25,7 @@ export const CurentaAssistance = forwardRef<HTMLDivElement>((_, ref) => {
   useMotionValueEvent(scrollYProgress, 'change', (current) => {
     if (typeof current !== 'number') return;
 
-    if (scrollYProgress.get() >= 0.352) {
+    if (scrollYProgress.get() >= 0.351) {
       setPhase(3);
     } else if (current > 0.25) {
       setPhase(2);
@@ -43,7 +43,7 @@ export const CurentaAssistance = forwardRef<HTMLDivElement>((_, ref) => {
             top: useTransform(
               scrollYProgress,
               [0, 0.04, 0.05, 0.35, 0.351],
-              ['auto', 'auto', -100, -100, 1720]
+              ['auto', 'auto', -100, -100, 1600]
             ),
             position: useTransform(
               scrollYProgress,
