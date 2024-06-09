@@ -1,13 +1,28 @@
 'use client';
 import { useMotionValueEvent, useScroll } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import {
   CurentaSvg,
   FloatingNav,
   CurentaAssistance,
 } from 'components/home-components';
 
+import { Mobile } from 'components/home-components/mobile';
+
 export default function Home() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 1800);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
   const ref = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -22,7 +37,9 @@ export default function Home() {
     direction = current - scrollYProgress.getPrevious()!;
   });
 
-  return (
+  return !!isMobile ? (
+    <Mobile />
+  ) : (
     <div className='grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-sans sm:p-20'>
       <main
         ref={ref}
