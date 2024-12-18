@@ -26,7 +26,7 @@ export const CurentaHeadlines = () => {
         </div>
 
         <Image
-          src={`/Screenshot 2024-06-09 194431.webp`}
+          src='/Screenshot 2024-06-09 194431.webp'
           alt='side img'
           height={558}
           width={615}

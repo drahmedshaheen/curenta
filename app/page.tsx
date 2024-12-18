@@ -1,13 +1,13 @@
 'use client';
-import { useMotionValueEvent, useScroll } from 'framer-motion';
+import { useMotionValueEvent, useScroll } from 'motion/react';
 import { useRef, useEffect, useState } from 'react';
 import {
   CurentaSvg,
   FloatingNav,
   CurentaAssistance,
-} from 'components/home-components';
+} from '@/components/home-components';
 
-import { Mobile } from 'components/home-components/mobile';
+import { Mobile } from '@/components/home-components/mobile';
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);

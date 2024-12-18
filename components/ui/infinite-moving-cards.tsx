@@ -1,16 +1,10 @@
 'use client';
 
-import { cn } from '@/utils/cn';
+import { cn } from '@/utils/styles';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-export const InfiniteMovingCards = ({
-  items,
-  direction = 'left',
-  speed = 'fast',
-  pauseOnHover = true,
-  className,
-}: {
+interface InfiniteMovingCardsProps {
   items: {
     quote: string;
     name: string;
@@ -21,7 +15,15 @@ export const InfiniteMovingCards = ({
   speed?: 'fast' | 'normal' | 'slow';
   pauseOnHover?: boolean;
   className?: string;
-}) => {
+}
+
+export function InfiniteMovingCards({
+  items,
+  direction = 'left',
+  speed = 'fast',
+  pauseOnHover = true,
+  className,
+}: InfiniteMovingCardsProps) {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
 
@@ -33,12 +35,12 @@ export const InfiniteMovingCards = ({
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
 
-      scrollerContent.forEach((item) => {
+      for (const item of scrollerContent) {
         const duplicatedItem = item.cloneNode(true);
         if (scrollerRef.current) {
           scrollerRef.current.appendChild(duplicatedItem);
         }
-      });
+      }
 
       getDirection();
       getSpeed();
@@ -100,7 +102,7 @@ export const InfiniteMovingCards = ({
               <div
                 aria-hidden='true'
                 className='user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]'
-              ></div>
+              />
               <span className='relative z-20 text-sm font-normal leading-[1.6] text-gray-400'>
                 {item.quote}
               </span>
@@ -130,4 +132,4 @@ export const InfiniteMovingCards = ({
       </ul>
     </div>
   );
-};
+}

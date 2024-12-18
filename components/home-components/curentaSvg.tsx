@@ -1,10 +1,10 @@
 'use client';
-import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { motion, useMotionValueEvent, useScroll } from 'motion/react';
 import {
   calculatePercentage,
   percentageToValue,
   generateAnimationValues,
-} from 'scripts/math';
+} from '@/scripts/math';
 import { forwardRef, useState, type RefObject } from 'react';
 
 interface CurentaSvgProps {
@@ -35,7 +35,7 @@ export const CurentaSvg = forwardRef<HTMLDivElement, CurentaSvgProps>(
       // Check if current is not undefined and is a number
       if (typeof current === 'number') {
         const [minScroll, maxScroll] = scrollRange;
-        let condition =
+        const condition =
           current > minScroll && current < maxScroll
             ? 'range'
             : current < minScroll
