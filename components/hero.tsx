@@ -27,7 +27,7 @@ export default function Hero({ children }: PropsWithChildren) {
   }, []);
 
   return (
-    <div className='relative h-screen w-full overflow-hidden bg-gradient-to-tr from-sky-800 from-10% via-sky-500 via-40% to-emerald-500 to-80%'>
+    <div className='relative h-[calc(100vh_-_80px)] w-full overflow-hidden bg-gradient-to-tr from-sky-800 from-10% via-sky-500 via-40% to-emerald-500 to-80%'>
       <div className='absolute inset-0 h-full w-full'>
         <div className='absolute inset-0 h-full w-full bg-[linear-gradient(to_right,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:100px_100px]' />
         <div className='absolute inset-0 h-full w-full bg-[linear-gradient(to_bottom,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:100px_100px]' />
