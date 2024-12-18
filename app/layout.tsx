@@ -13,19 +13,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Curenta | Assisted Living Facility EMR',
-  description:
-    'Optimize assisted living operations with Curenta’s software. Minimize medication errors, centralize data, and improve family communication. Trusted by 550+ facilities for effective patient care.',
-  title: 'Curenta | Assisted Living Facility EMR',
+  title: 'Curenta: Assisted Living Facility EMR',
   description:
     'Optimize assisted living operations with Curenta’s software. Minimize medication errors, centralize data, and improve family communication. Trusted by 550+ facilities for effective patient care.',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+type RootLayoutProps = Readonly<{
   children: React.ReactNode;
-}>) {
+}>;
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang='en'>
       <body
