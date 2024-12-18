@@ -1,36 +1,28 @@
 'use client';
-import { useMotionValueEvent, useScroll } from 'motion/react';
-import { useRef } from 'react';
-import {
-  CurentaSvg,
-  FloatingNav,
-  CurentaAssistance,
-} from '@/components/home-components';
-import { Header } from '@/components/Header';
+
+import Header from '@/components/header';
+import Image from 'next/image';
+import heroImage from '../public/Hero-img.webp';
+import dynamic from 'next/dynamic';
+
+const Hero = dynamic(() => import('@/components/hero'), { ssr: false });
 
 export default function Home() {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-  });
-
-  let direction: number;
-
-  useMotionValueEvent(scrollYProgress, 'change', (current) => {
-    if (typeof current !== 'number') return;
-    direction = current - scrollYProgress.getPrevious()!;
-  });
-
   return (
-    <div className='grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-sans sm:p-20'>
-      <div
-        ref={ref}
-        className='relative row-start-2 flex h-[3400px] w-full justify-center'
-      >
-        <Header />
-        <CurentaAssistance ref={ref} />
-      </div>
+    <div>
+      <Header />
+      <Hero>
+        <div className='absolute right-40 top-20 z-10 rounded-[calc(var(--radius)_+_3px)] bg-white/50 p-[6px] backdrop-blur-[1px]'>
+          <Image
+            src={heroImage}
+            alt=''
+            width={750}
+            className='rounded-lg'
+            placeholder='blur'
+            priority
+          />
+        </div>
+      </Hero>
     </div>
   );
 }

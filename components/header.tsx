@@ -4,10 +4,10 @@ import { motion } from 'motion/react';
 import { useState } from 'react';
 import { z } from 'zod';
 
-export const Header = () => {
+export default function Header() {
   return (
-    <div className='fixed inset-x-0 top-0 z-10 mx-auto h-20 w-full items-center bg-white/70 py-2 pl-8 pr-2 backdrop-blur-lg'>
-      <div className='grid grid-cols-3'>
+    <div className='sticky inset-x-0 top-0 z-10 h-20 w-full bg-white/70 backdrop-blur-lg'>
+      <div className='flex h-full items-center justify-between px-32'>
         <CurentaLogo className='w-44' />
         <div className='col-span-1 flex items-center justify-center space-x-10'>
           {['home', 'solutions', 'blog'].map((navItem: string) => (
@@ -47,14 +47,14 @@ export const Header = () => {
         </div>
       </div>
       <motion.div
-        className='h-5 border-b border-blue-200'
-        initial={{ width: '0vw' }}
-        animate={{ width: '100vw' }}
+        className='border-b border-blue-200'
+        initial={{ width: '0%' }}
+        animate={{ width: '100%' }}
         transition={{ duration: 0.8 }}
       />
     </div>
   );
-};
+}
 
 export const InputWithPlaceholder = () => {
   const InputSchema = z.string().email();
@@ -93,7 +93,7 @@ export const InputWithPlaceholder = () => {
         >
           {['M13 18l6 -6', 'M13 6l6 6'].map((path, idx) => (
             <motion.path
-              key={idx}
+              key={path}
               initial={{
                 strokeDasharray: '50%',
                 strokeDashoffset: '50%',

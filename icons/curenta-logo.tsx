@@ -2,8 +2,7 @@ import type { SVGProps } from 'react';
 const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
-    id='Layer_1'
-    data-name='Layer 1'
+    id='curenta-logo'
     aria-hidden='true'
     viewBox='0 0 1000 217.08'
     {...props}
