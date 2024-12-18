@@ -9,7 +9,7 @@ export default function Header() {
     <div className='sticky inset-x-0 top-0 z-10 h-20 w-full bg-white/70 backdrop-blur-lg'>
       <div className='flex h-full items-center justify-between px-32'>
         <CurentaLogo className='w-44' />
-        <div className='col-span-1 flex items-center justify-center space-x-10'>
+        {/* <div className='col-span-1 flex items-center justify-center space-x-10'>
           {['home', 'solutions', 'blog'].map((navItem: string) => (
             <button
               type='button'
@@ -44,7 +44,7 @@ export default function Header() {
             <span>Login</span>
             <span className='absolute inset-x-0 -bottom-px mx-auto h-px w-1/2 bg-gradient-to-r from-transparent via-blue-500 to-transparent' />
           </button>
-        </div>
+        </div> */}
       </div>
       <motion.div
         className='border-b border-blue-200'
