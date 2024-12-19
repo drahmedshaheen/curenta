@@ -1,0 +1,27 @@
+{
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+    },
+    "start": {
+      "dependsOn": ["^start"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "clean": {
+      "cache": false,
+      "dependsOn": ["^clean"]
+    },
+    "type-check": {
+      "cache": false,
+      "dependsOn": ["^type-check"]
+    },
+    "spell-check": {
+      "cache": false,
+      "dependsOn": ["^type-check"]
+    }
+  }
+}
