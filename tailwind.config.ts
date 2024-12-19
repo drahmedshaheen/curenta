@@ -54,7 +54,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['var(--font-ibm-plex-sans)'],
+        sans: ['var(--font-geist-sans)'],
+        mono: ['var(--font-geist-mono)'],
       },
       borderRadius: {
         lg: 'var(--radius)',

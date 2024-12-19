@@ -1,12 +1,12 @@
 import Image from 'next/image';
-import heroImage from '../public/Hero-img.webp';
+import heroImage from '../public/hero-img.webp';
 import { motion } from 'motion/react';
 import { SquareArrowOutUpRight } from 'lucide-react';
 
 export default function HeroContent() {
   return (
     <div className='grid h-full grid-cols-2 place-items-center gap-y-7 py-10'>
-      <div className='col-span-2 space-y-10 sm:space-y-7 lg:col-span-1 lg:space-y-0'>
+      <div className='col-span-2 space-y-5 lg:col-span-1 lg:space-y-0'>
         <div className='space-y-5 px-7 backdrop-blur-[2px] lg:p-12'>
           <h1 className='w-full text-center text-3xl font-medium leading-tight text-white selection:bg-white selection:text-sky-500 sm:text-4xl md:text-5xl 2xl:text-6xl'>
             AI Empowering Senior Living Communities at Their Core
@@ -26,9 +26,9 @@ export default function HeroContent() {
                 type='button'
                 className='inline-block flex-1 items-center justify-center rounded-[0.70rem] border border-white/20 bg-emerald-600 font-medium text-white'
               >
-                <div className='flex h-9 items-center justify-center gap-3 text-sm md:h-12 md:text-lg'>
+                <div className='flex h-9 items-center justify-center gap-1 text-sm md:h-12 md:text-lg'>
                   <span>See in Action</span>
-                  <SquareArrowOutUpRight className='size-4 md:size-6' />
+                  <SquareArrowOutUpRight className='size-3 md:size-4' />
                 </div>
               </button>
             </div>
@@ -37,7 +37,7 @@ export default function HeroContent() {
       </div>
 
       <motion.div
-        className='col-span-2 h-fit w-fit rounded-[calc(var(--radius)_+_3px)] bg-white/50 p-[6px] backdrop-blur-[1px] lg:col-span-1'
+        className='col-span-2 h-fit w-[750px] rounded-[calc(var(--radius)_+_3px)] bg-white/50 p-[6px] backdrop-blur-[1px] lg:col-span-1'
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: 'backOut' }}
@@ -45,7 +45,6 @@ export default function HeroContent() {
         <Image
           src={heroImage}
           alt='Hero Image'
-          width={750}
           className='rounded-lg'
           priority
         />
