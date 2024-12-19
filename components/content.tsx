@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import heroImage from '../public/Hero-img.webp';
 import { motion } from 'motion/react';
-import { CircleArrowRight } from 'lucide-react';
+import { SquareArrowOutUpRight } from 'lucide-react';
 
 export default function HeroContent() {
   return (
@@ -18,16 +18,20 @@ export default function HeroContent() {
           </p>
         </div>
 
-        <div className='mx-auto flex w-full max-w-sm items-center justify-center'>
-          <div className='relative z-10 flex w-full overflow-hidden rounded-md p-[1.5px]'>
-            <div className='animate-rotate absolute inset-0 rounded-full bg-[conic-gradient(#ffffff_20deg,transparent_120deg)]' />
-            <button
-              type='button'
-              className='relative inline-flex h-9 w-56 items-center justify-center gap-3 rounded-md border border-white/20 bg-emerald-600 px-4 py-2 font-medium text-white sm:w-96'
-            >
-              <span>See in Action</span>
-              <CircleArrowRight />
-            </button>
+        <div className='mx-auto flex w-56 max-w-lg items-center justify-center md:w-96'>
+          <div className='relative z-10 flex w-full cursor-pointer items-center overflow-hidden rounded-xl p-px'>
+            <div className='animate-rotate absolute inset-0 h-full w-full rounded-full bg-[conic-gradient(#ffffff_20deg,transparent_120deg)]' />
+            <div className='relative z-20 flex w-full'>
+              <button
+                type='button'
+                className='inline-block flex-1 items-center justify-center rounded-[0.70rem] border border-white/20 bg-emerald-600 font-medium text-white'
+              >
+                <div className='flex h-9 items-center justify-center gap-3 text-sm md:h-12 md:text-lg'>
+                  <span>See in Action</span>
+                  <SquareArrowOutUpRight className='size-4 md:size-6' />
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       </div>
