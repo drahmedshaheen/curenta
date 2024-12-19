@@ -18,14 +18,17 @@ export default function HeroContent() {
           </p>
         </div>
 
-        <div className='flex w-full justify-center px-10'>
-          <button
-            type='button'
-            className='relative inline-flex h-9 w-56 items-center justify-center gap-3 rounded-md border border-white bg-emerald-600 px-4 py-2 font-medium text-white shadow-[0px_1px_5px_0px_rgba(255_255_255_/_0.5)] transition-all duration-300 hover:shadow-[0px_2px_10px_0px_rgba(255_255_255_/_0.9)] focus:shadow-[0px_2px_10px_0px_rgba(255_255_255_/_0.9)] focus:outline-sky-900 sm:w-96'
-          >
-            <span>See in Action</span>
-            <CircleArrowRight />
-          </button>
+        <div className='mx-auto flex w-full max-w-sm items-center justify-center'>
+          <div className='relative z-10 flex w-full overflow-hidden rounded-md p-[1.5px]'>
+            <div className='animate-rotate absolute inset-0 rounded-full bg-[conic-gradient(#ffffff_20deg,transparent_120deg)]' />
+            <button
+              type='button'
+              className='relative inline-flex h-9 w-56 items-center justify-center gap-3 rounded-md border border-white/20 bg-emerald-600 px-4 py-2 font-medium text-white sm:w-96'
+            >
+              <span>See in Action</span>
+              <CircleArrowRight />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -40,7 +43,6 @@ export default function HeroContent() {
           alt='Hero Image'
           width={750}
           className='rounded-lg'
-          placeholder='blur'
           priority
         />
       </motion.div>
