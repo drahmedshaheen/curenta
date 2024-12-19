@@ -6,7 +6,7 @@ import { z } from 'zod';
 
 export default function Header() {
   return (
-    <div className='sticky inset-x-0 top-0 z-10 h-20 w-full bg-white'>
+    <div className='sticky inset-x-0 top-0 z-50 h-12 w-full bg-white lg:h-20'>
       <div className='flex h-full items-center justify-between px-32'>
         <CurentaLogo className='w-44' />
         {/* <div className='col-span-1 flex items-center justify-center space-x-10'>
@@ -47,7 +47,7 @@ export default function Header() {
         </div> */}
       </div>
       <motion.div
-        className='border-b border-blue-200'
+        className='h-1 rounded-full bg-sky-500'
         initial={{ width: '0%' }}
         animate={{ width: '100%' }}
         transition={{ duration: 0.8 }}
