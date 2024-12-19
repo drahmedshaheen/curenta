@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import heroImage from '../public/hero-img.webp';
+import heroImage from '../public/hero-1000x751.webp';
 import { motion } from 'motion/react';
 import { SquareArrowOutUpRight } from 'lucide-react';
 
