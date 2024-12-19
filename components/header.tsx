@@ -6,7 +6,7 @@ import { z } from 'zod';
 
 export default function Header() {
   return (
-    <div className='sticky inset-x-0 top-0 z-10 h-20 w-full bg-white/70 backdrop-blur-lg'>
+    <div className='sticky inset-x-0 top-0 z-10 h-20 w-full bg-white'>
       <div className='flex h-full items-center justify-between px-32'>
         <CurentaLogo className='w-44' />
         {/* <div className='col-span-1 flex items-center justify-center space-x-10'>

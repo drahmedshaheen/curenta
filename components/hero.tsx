@@ -5,6 +5,19 @@ import type { PropsWithChildren } from 'react';
 import React, { useState, useEffect, useRef } from 'react';
 import { debounce } from 'lodash';
 
+function mapRange(
+  value: number,
+  inputMin: number,
+  inputMax: number,
+  outputMin: number,
+  outputMax: number
+) {
+  return (
+    ((value - inputMin) / (inputMax - inputMin)) * (outputMax - outputMin) +
+    outputMin
+  );
+}
+
 export default function Hero({ children }: PropsWithChildren) {
   const [size, setSize] = useState({
     width: window.innerWidth,
@@ -26,6 +39,8 @@ export default function Hero({ children }: PropsWithChildren) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  console.log(Math.round(size.height / 100) - 1);
+
   return (
     <div className='relative h-[calc(100vh_-_80px)] w-full overflow-hidden bg-gradient-to-tr from-sky-800 from-10% via-sky-500 via-40% to-emerald-500 to-80%'>
       <div className='absolute inset-0 h-full w-full'>
@@ -41,10 +56,21 @@ export default function Hero({ children }: PropsWithChildren) {
           style={{ x: 100 * (n + 1) }}
           animate={{ y: 1000 }}
           transition={{
-            duration: Math.floor(Math.random() * (20 - 3 + 1)) + 3,
-            delay: Math.random() * 50,
+            duration:
+              Math.floor(
+                Math.random() *
+                  mapRange(Math.round(size.width / 100) - 1, 3, 19, 0.1, 1) *
+                  (20 - 3 + 1)
+              ) + 3,
+            delay:
+              Math.random() *
+              mapRange(Math.round(size.width / 100) - 1, 3, 19, 0.1, 1) *
+              50,
             repeat: Number.POSITIVE_INFINITY,
-            repeatDelay: Math.random() * 100,
+            repeatDelay:
+              Math.random() *
+              mapRange(Math.round(size.width / 100) - 1, 3, 19, 0.1, 1) *
+              100,
           }}
         />
       ))}
@@ -57,10 +83,21 @@ export default function Hero({ children }: PropsWithChildren) {
           style={{ y: 100 * (n + 1) }}
           animate={{ x: 3000 }}
           transition={{
-            duration: Math.floor(Math.random() * (25 - 5 + 1)) + 5,
-            delay: Math.random() * 50,
+            duration:
+              Math.floor(
+                Math.random() *
+                  mapRange(Math.round(size.height / 100) - 1, 2, 8, 0.1, 1) *
+                  (25 - 5 + 1)
+              ) + 5,
+            delay:
+              Math.random() *
+              mapRange(Math.round(size.height / 100) - 1, 2, 8, 0.1, 1) *
+              50,
             repeat: Number.POSITIVE_INFINITY,
-            repeatDelay: Math.random() * 100,
+            repeatDelay:
+              Math.random() *
+              mapRange(Math.round(size.height / 100) - 1, 2, 8, 0.1, 1) *
+              100,
           }}
         />
       ))}

@@ -6,6 +6,10 @@
   font-family: Arial, Helvetica, sans-serif;
 } */
 
+/* * {
+  outline: 3px solid limegreen;
+} */
+
 @layer base {
   :root {
     --background: 0 0% 100%;
