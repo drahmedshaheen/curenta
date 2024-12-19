@@ -18,6 +18,10 @@
     "type-check": {
       "cache": false,
       "dependsOn": ["^type-check"]
+    },
+    "spell-check": {
+      "cache": false,
+      "dependsOn": ["^type-check"]
     }
   }
 }
