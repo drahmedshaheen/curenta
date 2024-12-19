@@ -20,7 +20,7 @@ export default function HeroContent() {
 
         <div className='mx-auto flex w-56 max-w-lg items-center justify-center md:w-96'>
           <div className='relative z-10 flex w-full cursor-pointer items-center overflow-hidden rounded-xl p-px'>
-            <div className='animate-rotate absolute inset-0 h-full w-full rounded-full bg-[conic-gradient(#ffffff_20deg,transparent_120deg)]' />
+            <div className='absolute inset-0 h-full w-full animate-rotate rounded-full bg-[conic-gradient(#ffffff_20deg,transparent_120deg)]' />
             <div className='relative z-20 flex w-full'>
               <button
                 type='button'

@@ -2,6 +2,9 @@ $schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell
 version: '0.2'
 language: en
 useGitignore: true
+ignorePaths:
+  - lefthook.yml
+  - pnpm-lock.yaml
 words:
   - curenta
   - lefthook
