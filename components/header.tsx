@@ -1,3 +1,4 @@
+'use client';
 import { CurentaLogo } from '@/icons/curenta-logo';
 import { cn } from '@/utils/styles';
 import { motion } from 'motion/react';
@@ -8,7 +9,7 @@ import { Show } from './ui/show';
 import NavBarMobile from './nav-bar-mobile';
 
 export default function Header() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 1024);
