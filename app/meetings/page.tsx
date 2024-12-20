@@ -97,36 +97,27 @@ export default function Meeting() {
 
                 <div className='flex w-full flex-col gap-2 md:hidden'>
                   <h1 className='font-medium'>What time works best?</h1>
+                  <p className='text-xs'>
+                    Showing times for&nbsp;
+                    <strong className='font-medium'>
+                      {date
+                        ? date.toLocaleString('en-us', {
+                            dateStyle: 'long',
+                          })
+                        : new Date()?.toLocaleString('en-us', {
+                            dateStyle: 'long',
+                          })}
+                    </strong>
+                  </p>
 
-                  <Select>
-                    <SelectTrigger className='w-full'>
-                      <SelectValue
-                        placeholder={
-                          <p className='text-xs'>
-                            Showing times for&nbsp;
-                            <strong className='font-medium'>
-                              {date
-                                ? date.toLocaleString('en-us', {
-                                    dateStyle: 'long',
-                                  })
-                                : new Date()?.toLocaleString('en-us', {
-                                    dateStyle: 'long',
-                                  })}
-                            </strong>
-                          </p>
-                        }
-                      />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        {timeSlots.map((slot) => (
-                          <SelectItem key={slot} value={slot}>
-                            {slot}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+                  <select>
+                    <option value=''>--Please choose desired time--</option>
+                    {timeSlots.map((slot) => (
+                      <option key={slot} value={slot}>
+                        {slot}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
