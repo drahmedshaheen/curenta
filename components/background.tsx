@@ -28,20 +28,23 @@ const calcLinesAnimate = (
 };
 
 export default function Background({ children }: PropsWithChildren) {
+  const ref = useRef<HTMLDivElement>(null);
+
   const [size, setSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: 0,
+    height: 0,
   });
 
   useEffect(() => {
-    const handleResize = debounce(
-      () =>
+    const handleResize = debounce(() => {
+      if (ref.current) {
         setSize({
-          width: window.innerWidth,
-          height: window.innerHeight,
-        }),
-      300
-    );
+          width: ref.current.offsetWidth,
+          height: ref.current.offsetHeight,
+        });
+      }
+    }, 300);
+    handleResize();
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -62,7 +65,10 @@ export default function Background({ children }: PropsWithChildren) {
   }, [size]);
 
   return (
-    <div className='relative h-[calc(100dvh_-_48px)] w-full overflow-hidden lg:h-[calc(100dvh_-_80px)]'>
+    <div
+      ref={ref}
+      className='relative h-[calc(100dvh_-_48px)] w-full overflow-hidden lg:h-[calc(100dvh_-_80px)]'
+    >
       <div className='absolute inset-0 -z-10 h-full w-full bg-gradient-to-tr from-sky-800 from-10% via-sky-500 via-40% to-emerald-500 to-80%'>
         <div className='absolute inset-0 -z-10 h-full w-full'>
           <div className='absolute inset-0 h-full w-full bg-[linear-gradient(to_right,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:100px_100px]' />
