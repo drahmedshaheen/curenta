@@ -8,7 +8,9 @@ export default function NavBarMobile() {
   const [isOpen, setOpen] = useState(false);
   return (
     <div className='flex h-full items-center justify-between px-5 lg:hidden'>
-      <CurentaLogo className='w-32' />
+      <Link href='/'>
+        <CurentaLogo className='w-32' />
+      </Link>
 
       <Button variant='outline' size='icon' onClick={() => setOpen(true)}>
         <MenuIcon className='size-6' />

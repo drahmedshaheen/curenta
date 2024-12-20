@@ -2,6 +2,7 @@ import Image from 'next/image';
 import heroImage from '../public/hero-1000x751.webp';
 import { motion } from 'motion/react';
 import { SquareArrowOutUpRight } from 'lucide-react';
+import Link from 'next/link';
 
 export default function HeroContent() {
   return (
@@ -22,15 +23,15 @@ export default function HeroContent() {
           <div className='relative z-10 flex w-full cursor-pointer items-center overflow-hidden rounded-xl p-px'>
             <div className='absolute inset-0 h-full w-full animate-rotate rounded-full bg-[conic-gradient(#ffffff_20deg,transparent_120deg)]' />
             <div className='relative z-20 flex w-full'>
-              <button
-                type='button'
+              <Link
+                href='/meetings'
                 className='inline-block flex-1 items-center justify-center rounded-[0.70rem] border border-white/20 bg-emerald-600 font-medium text-white'
               >
                 <div className='flex h-9 items-center justify-center gap-1 text-sm md:h-12 md:text-lg'>
                   <span>See in Action</span>
                   <SquareArrowOutUpRight className='size-3 md:size-4' />
                 </div>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
