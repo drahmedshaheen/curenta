@@ -1,5 +1,5 @@
 'use client';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { useState } from 'react';
 import Button from './ui/button';
 import Link from 'next/link';
@@ -57,30 +57,39 @@ function NavBarMobile() {
         <span className='sr-only'>Toggle navigation menu</span>
       </Button>
 
-      {isOpen && (
-        <div className='fixed inset-0 w-full'>
-          <div className='flex flex-col bg-gray-100 p-4 dark:bg-gray-800'>
-            <Button
-              variant='ghost'
-              size='icon'
-              className='self-start'
-              onClick={() => setOpen(false)}
-            >
-              <XIcon className='size-6' />
-              <span className='sr-only'>Toggle navigation menu</span>
-            </Button>
-            <div className='grid gap-4 py-4'>
-              <Link
-                href='#'
-                className='flex w-full items-center py-2 text-lg font-semibold'
-                prefetch={false}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            key='menu'
+            className='fixed inset-0 w-full'
+            initial={{ y: -200 }}
+            animate={{ y: 0 }}
+            exit={{ y: -200 }}
+            transition={{ ease: 'easeOut' }}
+          >
+            <div className='flex flex-col bg-white p-2 text-slate-800'>
+              <Button
+                variant='ghost'
+                size='icon'
+                className='self-start'
+                onClick={() => setOpen(false)}
               >
-                Blogs
-              </Link>
+                <XIcon className='size-6' />
+                <span className='sr-only'>Toggle navigation menu</span>
+              </Button>
+              <div className='grid gap-4 py-2 pl-6'>
+                <Link
+                  href='#'
+                  className='flex w-full items-center py-2 text-lg font-semibold'
+                  prefetch={false}
+                >
+                  Blogs
+                </Link>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

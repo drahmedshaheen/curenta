@@ -3,7 +3,6 @@
 import { motion } from 'motion/react';
 import type { PropsWithChildren } from 'react';
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { debounce } from 'lodash';
 
 /**
  * Calculates a factor based on the given lines count, minimum count, and maximum count.
@@ -36,14 +35,14 @@ export default function Background({ children }: PropsWithChildren) {
   });
 
   useEffect(() => {
-    const handleResize = debounce(() => {
+    const handleResize = () => {
       if (ref.current) {
         setSize({
           width: ref.current.offsetWidth,
           height: ref.current.offsetHeight,
         });
       }
-    }, 300);
+    };
     handleResize();
 
     window.addEventListener('resize', handleResize);
@@ -67,7 +66,7 @@ export default function Background({ children }: PropsWithChildren) {
   return (
     <div
       ref={ref}
-      className='relative h-[calc(100dvh_-_48px)] w-full overflow-hidden lg:h-[calc(100dvh_-_80px)]'
+      className='relative h-fit min-h-[calc(100dvh_-_48px)] w-full overflow-hidden lg:h-[calc(100dvh_-_80px)] lg:min-h-0'
     >
       <div className='absolute inset-0 -z-10 h-full w-full bg-gradient-to-tr from-sky-800 from-10% via-sky-500 via-40% to-emerald-500 to-80%'>
         <div className='absolute inset-0 -z-10 h-full w-full'>
