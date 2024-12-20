@@ -67,7 +67,7 @@ export default function Background({ children }: PropsWithChildren) {
   return (
     <div
       ref={ref}
-      className='relative h-[calc(100vh_-_48px)] w-full overflow-hidden lg:h-[calc(100vh_-_80px)]'
+      className='relative h-[calc(100dvh_-_48px)] w-full overflow-hidden lg:h-[calc(100dvh_-_80px)]'
     >
       <div className='absolute inset-0 -z-10 h-full w-full bg-gradient-to-tr from-sky-800 from-10% via-sky-500 via-40% to-emerald-500 to-80%'>
         <div className='absolute inset-0 -z-10 h-full w-full'>
