@@ -58,6 +58,7 @@ export default function Meeting() {
   }, []);
 
   const [date, setDate] = useState<Date | undefined>(new Date());
+  const [selected, setSelected] = useState('');
 
   return (
     <Background>
@@ -138,7 +139,11 @@ export default function Meeting() {
 
                 <div className='mt-2 flex h-[470px] w-full flex-col gap-2 overflow-y-scroll'>
                   {timeSlots.map((slot) => (
-                    <Button key={slot} variant='outline'>
+                    <Button
+                      key={slot}
+                      variant={selected === slot ? 'default' : 'outline'}
+                      onClick={() => setSelected(slot)}
+                    >
                       {slot}
                     </Button>
                   ))}
