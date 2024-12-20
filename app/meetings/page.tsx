@@ -142,7 +142,9 @@ export default function Meeting() {
                     <Button
                       key={slot}
                       variant={selected === slot ? 'default' : 'outline'}
-                      onClick={() => setSelected(slot)}
+                      onClick={() =>
+                        setSelected((prev) => (prev === slot ? '' : slot))
+                      }
                     >
                       {slot}
                     </Button>
