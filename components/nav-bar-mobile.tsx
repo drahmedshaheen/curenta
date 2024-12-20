@@ -1,12 +1,15 @@
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { MenuIcon, XIcon } from 'lucide-react';
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
+import { CurentaLogo } from '@/icons/curenta-logo';
 
 export default function NavBarMobile() {
   const [isOpen, setOpen] = useState(false);
   return (
-    <Fragment>
+    <div className='flex h-full items-center justify-between px-5 lg:hidden'>
+      <CurentaLogo className='w-32' />
+
       <Button variant='outline' size='icon' onClick={() => setOpen(true)}>
         <MenuIcon className='size-6' />
         <span className='sr-only'>Toggle navigation menu</span>
@@ -36,6 +39,6 @@ export default function NavBarMobile() {
           </div>
         </div>
       )}
-    </Fragment>
+    </div>
   );
 }

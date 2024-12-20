@@ -1,49 +1,20 @@
 'use client';
-import { CurentaLogo } from '@/icons/curenta-logo';
+
 import { cn } from '@/utils/styles';
 import { motion } from 'motion/react';
 import { useState, Fragment, useEffect } from 'react';
 import { z } from 'zod';
 import { Button } from './ui/button';
-import { Show } from './ui/show';
 import NavBarMobile from './nav-bar-mobile';
+import NavBarDeskTop from './nav-bar-desktop';
 
 export default function Header() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 1024);
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
     <div className='sticky inset-x-0 top-0 z-50 h-12 w-full bg-white lg:h-20'>
-      <div className='flex h-full items-center justify-between px-5 lg:px-32'>
-        <CurentaLogo className='w-32 lg:w-44' />
+      <NavBarMobile />
+      <NavBarDeskTop />
 
-        <Show if={!isMobile} else={<NavBarMobile />}>
-          <Fragment>
-            <Button className='w-32' variant='ghost'>
-              Blogs
-            </Button>
-
-            <Button
-              className='w-32'
-              onClick={() =>
-                window.location.assign('https://dashboard.curenta.com/login')
-              }
-            >
-              Login
-            </Button>
-          </Fragment>
-        </Show>
-
-        {/* <div className='col-span-1 flex items-center justify-center space-x-10'>
+      {/* <div className='col-span-1 flex items-center justify-center space-x-10'>
           {['home', 'solutions', 'blog'].map((navItem: string) => (
             <button
               type='button'
@@ -79,7 +50,7 @@ export default function Header() {
             <span className='absolute inset-x-0 -bottom-px mx-auto h-px w-1/2 bg-gradient-to-r from-transparent via-blue-500 to-transparent' />
           </button>
         </div> */}
-      </div>
+
       <motion.div
         className='h-1 rounded-full bg-sky-500'
         initial={{ width: '0%' }}
