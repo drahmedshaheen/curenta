@@ -45,7 +45,7 @@ export default function Home() {
         </div>
 
         <motion.div
-          className='col-span-2 h-fit w-[calc(100vw_-_30px)] rounded-[calc(var(--radius)_+_3px)] bg-white/50 p-[6px] backdrop-blur-[1px] lg:col-span-1 lg:w-[750px]'
+          className='col-span-2 h-fit w-[calc(100vw_-_30px)] max-w-[750px] rounded-[calc(var(--radius)_+_3px)] bg-white/50 p-[6px] backdrop-blur-[1px] lg:col-span-1 lg:w-full'
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: 'backOut' }}

@@ -28,8 +28,6 @@ const calcLinesAnimate = (
 };
 
 export default function Background({ children }: PropsWithChildren) {
-  const ref = useRef<HTMLDivElement>(null);
-
   const [size, setSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -46,7 +44,6 @@ export default function Background({ children }: PropsWithChildren) {
     );
 
     window.addEventListener('resize', handleResize);
-
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -65,10 +62,7 @@ export default function Background({ children }: PropsWithChildren) {
   }, [size]);
 
   return (
-    <div
-      ref={ref}
-      className='relative h-[calc(100dvh_-_48px)] w-full overflow-hidden lg:h-[calc(100dvh_-_80px)]'
-    >
+    <div className='relative h-[calc(100dvh_-_48px)] w-full overflow-hidden lg:h-[calc(100dvh_-_80px)]'>
       <div className='absolute inset-0 -z-10 h-full w-full bg-gradient-to-tr from-sky-800 from-10% via-sky-500 via-40% to-emerald-500 to-80%'>
         <div className='absolute inset-0 -z-10 h-full w-full'>
           <div className='absolute inset-0 h-full w-full bg-[linear-gradient(to_right,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:100px_100px]' />
@@ -77,8 +71,7 @@ export default function Background({ children }: PropsWithChildren) {
 
         {new Array(lines.count.horizontal).fill(null).map((_, n) => (
           <motion.div
-            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-            key={n}
+            key={`${size.height}-${n}`}
             className='absolute -inset-y-16 -z-10 h-[50px] w-[1px] rounded-full bg-gradient-to-t from-white to-transparent'
             style={{ x: 100 * (n + 1) }}
             animate={{ y: size.height + 100 }}
@@ -93,8 +86,7 @@ export default function Background({ children }: PropsWithChildren) {
 
         {new Array(lines.count.vertical).fill(null).map((_, n) => (
           <motion.div
-            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-            key={n}
+            key={`${size.width}-${n}`}
             className='absolute -inset-x-16 -z-10 h-[1px] w-[50px] rounded-full bg-gradient-to-l from-white to-transparent'
             style={{ y: 100 * (n + 1) }}
             animate={{ x: size.width + 100 }}
