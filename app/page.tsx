@@ -1,7 +1,7 @@
 'use client';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import heroImage from '../public/hero-750x563.webp';
+import heroImage from '../public/hero-1000x751.webp';
 import { motion } from 'motion/react';
 import { SquareArrowOutUpRight } from 'lucide-react';
 import Link from 'next/link';
