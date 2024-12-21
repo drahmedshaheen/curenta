@@ -13,7 +13,7 @@ const Background = dynamic(() => import('@/components/background'), {
 export default function Home() {
   return (
     <Background>
-      <div className='grid h-full w-full grid-cols-2 place-items-center gap-y-7 p-10'>
+      <div className='grid h-full w-full grid-cols-2 place-items-center gap-y-7 px-4 py-10 lg:px-10'>
         <div className='col-span-2 space-y-5 lg:col-span-1 lg:space-y-0'>
           <div className='space-y-5 px-7 backdrop-blur-[2px] lg:p-12'>
             <h1 className='w-full text-center text-3xl font-medium leading-tight text-white selection:bg-white selection:text-sky-500 sm:text-4xl md:text-5xl 2xl:text-6xl'>
