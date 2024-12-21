@@ -25,7 +25,7 @@ export default function Header() {
 function NavBarDeskTop() {
   return (
     <div className='hidden h-full items-center justify-between px-32 lg:flex'>
-      <Link href='/'>
+      <Link aria-label='Curenta' href='/'>
         <CurentaLogo className='w-44' />
       </Link>
 
@@ -48,7 +48,7 @@ function NavBarMobile() {
   const [isOpen, setOpen] = useState(false);
   return (
     <div className='flex h-full items-center justify-between px-5 lg:hidden'>
-      <Link href='/'>
+      <Link aria-label='Curenta' href='/'>
         <CurentaLogo className='w-32' />
       </Link>
 

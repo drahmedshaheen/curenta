@@ -62,7 +62,7 @@ export default function Meeting() {
 
   return (
     <Background>
-      <div className='flex h-full items-center justify-center'>
+      <div className='flex h-full items-center justify-center p-10'>
         <Card className='w-[340px] md:w-[768px]'>
           <Card.Header>
             <Card.Title>Meeting duration</Card.Title>
